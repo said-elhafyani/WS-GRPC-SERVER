@@ -1,0 +1,25 @@
+// 1-etap  cree le fichie protofile
+syntax = "proto3";
+option java_package = "org.sid.stub";
+service BankService {
+  rpc convert(ConvertCurencyRequist) returns (ConvertCurrencyResponse); // unary model (une modél de communication)
+  rpc getCurrencyStream(ConvertCurencyRequist) returns (stream ConvertCurrencyResponse); //server Streaming model (une modél de communication)
+  rpc performStream(stream ConvertCurencyRequist) returns (ConvertCurrencyResponse); // client streaming model (une modél de communication)
+  rpc fullCurrencyStream(stream ConvertCurencyRequist) returns (stream ConvertCurrencyResponse); // Bidirectional model (une modél de communication)
+}
+
+message ConvertCurencyRequist {
+  string currencyFrom = 1;
+  string currencyTo = 2;
+  double amount = 3;
+}
+
+message ConvertCurrencyResponse {
+  string currencyFrom = 1;
+  string currencyTo = 2;
+  double amount = 3;
+  double result = 4;
+}
+
+// 2-etap compiler protobuf (qui permet de generer des codes java)
+// 3-etap cree le service
